@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics.Geometry;
 using UnityEngine;
 
 namespace SimpleSetupEcs2d
@@ -34,8 +35,10 @@ namespace SimpleSetupEcs2d
             );
 
             var boundary = new WorldBoundary {
-                min = new(rect.min, 0f),
-                max = new(rect.max, 0f),
+                aabb = new MinMaxAABB {
+                    Min = new(rect.min, 0f),
+                    Max = new(rect.max, 0f),
+                }
             };
 
             EntityManager.CreateSingleton(boundary, nameof(WorldBoundary));
